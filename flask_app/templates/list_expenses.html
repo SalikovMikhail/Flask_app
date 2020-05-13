@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Change budget 
+{% endblock %}
+
+{% block content %}
+<div class="content-section">
+    {% for expense in expenses %}
+        <div class="row">
+            <div class="col-sm-4">
+                <p>{{ expense.name }}</p>
+            </div>
+            <div class="col-sm-4">   
+                <p>{{ expense.amount }}</p>
+            </div>
+            <div class="col-sm-4">
+                <a href="{{ url_for('expense_module.delete_expense', id_expense = expense.id) }}">Удалить</a>
+            </div>
+        </div>        
+    {% endfor %}
+</div>
+{% endblock %}

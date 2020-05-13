@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Main
+{% endblock %}
+
+{% block content %}
+  <div class="content-section">
+    <form action="" method="POST">
+        {{ form.hidden_tag() }}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">Привет , {{ current_user.name }}!</legend>
+            <div class="form-group">
+                {{ form.sum.label(class="form-control-label") }}
+                {{ form.sum(class="form-control form-control-lg") }}
+            </div>
+            <div class="form-group">
+                {{ form.nameExpense.label(class="form-control-label") }}
+                {{ form.nameExpense(class="form-control form-control-lg") }}
+            </div>
+            <div class="form-group">
+                {{ form.submit(class="btn btn-primary")}}
+            </div>
+        </fieldset>
+    </form>
+  </div> 
+<div class="container border-bottom mb-4">
+     <div class="row">  
+         <div class="col-sm-8">
+            <p>Бюджет на месяц</p>
+            <p>Расходы</p>
+            <p>Остаток</p>
+        </div>
+        <div class="col-sm-4">
+            <p>{{ budget }}</p>
+            <p>{{ summa }}</p>
+            <p>{{ delsumma }}</p>
+        </div>
+     </div>   
+</div>  
+<div class="container">
+    {% for expense in expenses %}
+        <div class="row">
+            <div class="col-sm-8">
+                <p>{{ expense.name }}</p>
+            </div>
+            <div class="col-sm-4">   
+                <p>{{ expense.amount }}</p>
+            </div>
+        </div>        
+    {% endfor %}
+</div>
+
+{% endblock %}

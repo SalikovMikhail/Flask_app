@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Profile
+{% endblock %}
+
+{% block content %}
+<div class="content-section">
+    <div class="border-bottom mb-4">
+        <h1>Ваш профиль</h1>
+    </div>
+    <div class="row"> 
+        <div class="col-sm-6">
+            <p>Имя</p>
+            <p>Фамилия</p>
+            <p>Ваш бюджет на месяц</p>
+            <p>Ваш адрес email</p>
+       </div>
+       <div class="col-sm-6">
+            <p>{{ first_name }}</p>
+            <p>{{ second_name }}</p>
+            <p>{{ budget }}</p>
+            <p>{{ email }}</p>
+       </div>
+    </div>
+    <a href="{{ url_for('users.change_budget') }}" class="btn btn-primary" role="button">Изменить бюджет</a>
+    <a href="{{ url_for('users.change_password') }}" class="btn btn-primary" role="button">Изменить пароль</a>   
+</div>
+{% endblock %}
