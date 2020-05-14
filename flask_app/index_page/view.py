@@ -1,11 +1,10 @@
 from flask import render_template, redirect, url_for, Blueprint
 from expense.forms import SetExpenseForm
 from app import db
-from flask_login import current_user
 from models import Expense
+from flask_login import current_user
 from sqlalchemy import extract
-from datetime import datetime
-
+from flask_app.expense.utils import get_list_expense_users
 
 index_page = Blueprint('index_page', __name__)
 
@@ -21,15 +20,15 @@ def home():
         return redirect(url_for('index_page.home'))
     if current_user.is_authenticated:
         print('Пользователь авторизован')
-        summa = 0
-        delsumma = 0
-        expenses = db.session.query(Expense).filter(Expense.id_user == current_user.get_id(), extract('month',Expense.created_date) == datetime.today().month, extract('year', Expense.created_date) == datetime.today().year).order_by(Expense.created_date.desc()).all()
-        for sumExpense in expenses:
-            summa = summa + sumExpense.amount
+        sum_expense = 0
+        total = 0
+        expenses = get_list_expense_users(current_user.get_id())
+        for current_expense in expenses:
+            sum_expense = sum_expense + current_expense.amount
         budget = current_user.budget
-        delsumma = budget - summa
+        total = budget - sum_expense
         print(expenses)
-        return render_template('home_is_authenticated.html', expenses=expenses, budget = budget, form = form, summa = summa, delsumma = delsumma)
+        return render_template('home_is_authenticated.html', expenses=expenses, budget = budget, form = form, sum_expense = sum_expense, total = total)
     else:
         print('Пользователь не авторизован')
         return render_template('main.html')

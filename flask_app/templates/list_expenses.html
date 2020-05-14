@@ -1,11 +1,14 @@
 {% extends 'base.html' %}
 
 {% block title %}
-Change budget 
+Расходы
 {% endblock %}
 
 {% block content %}
 <div class="content-section">
+    <div class="border-bottom mb-4">
+        <h1>Ваши расходы</h1>
+    </div>
     {% for expense in expenses %}
         <div class="row">
             <div class="col-sm-4">

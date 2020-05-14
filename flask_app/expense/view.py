@@ -3,7 +3,7 @@ from flask_login import  current_user, login_required
 from sqlalchemy import extract
 from models import Expense
 from app import db
-from datetime import datetime
+from flask_app.expense.utils import get_list_expense_users
 
 expense_module = Blueprint('expense_module', __name__)
 
@@ -11,7 +11,7 @@ expense_module = Blueprint('expense_module', __name__)
 @login_required
 @expense_module.route("/", methods=['POST','GET'])
 def get_list_expenses():
-    expenses = db.session.query(Expense).filter(Expense.id_user == current_user.get_id(), extract('month',Expense.created_date) == datetime.today().month, extract('year', Expense.created_date) == datetime.today().year).order_by(Expense.created_date.desc()).all()
+    expenses = get_list_expense_users(current_user.get_id())
     return render_template('list_expenses.html', expenses = expenses)
 
 

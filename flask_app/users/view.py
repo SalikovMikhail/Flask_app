@@ -28,6 +28,7 @@ def registration_str():
     form = RegistrationForm()
     if form.validate_on_submit():
         password_hash = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
+        print(password_hash)
         user = User(name = form.name.data, family = form.family.data,email = form.email.data,password = password_hash, budget=form.budget.data)
         db.session.add(user)
         db.session.commit()
