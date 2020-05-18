@@ -20,6 +20,8 @@ def login_str():
                 login_user(user)
                 print('User login now')
                 return redirect(url_for('index_page.home'))
+            else:
+                flash('Войти не удалось, пожалуйста, проверьте введенные email и пароль', 'danger')
         return render_template('login.html',form = form)
 
 
@@ -71,6 +73,8 @@ def change_password():
             db.session.commit()
             logout()
             return redirect(url_for('index_page.home'))
+        else: 
+            flash('Пароль неверный.','danger')    
     return render_template('change_password.html', form = form)        
 
 
