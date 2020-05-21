@@ -6,7 +6,8 @@ from models import User
 
 
 users = Blueprint('users',__name__)
-
+"""Blueprint users"""
+"""Отвечает взаимодействие пользователя с приложением, изменениями их данных"""
 
 @users.route('/login/', methods=['GET', 'POST'])
 def login_str():
@@ -18,7 +19,6 @@ def login_str():
             user = User.query.filter_by(email=form.email.data).first()
             if user and bcrypt.check_password_hash(user.password, form.password.data):
                 login_user(user)
-                print('User login now')
                 return redirect(url_for('index_page.home'))
             else:
                 flash('Войти не удалось, пожалуйста, проверьте введенные email и пароль', 'danger')
@@ -30,11 +30,9 @@ def registration_str():
     form = RegistrationForm()
     if form.validate_on_submit():
         password_hash = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
-        print(password_hash)
         user = User(name = form.name.data, family = form.family.data,email = form.email.data,password = password_hash, budget=form.budget.data)
         db.session.add(user)
         db.session.commit()
-        print('user created')
         flash('Your account has been created!','success')
         return redirect(url_for('users.login_str'))
     return render_template('registration.html', form=form)

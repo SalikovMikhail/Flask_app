@@ -6,7 +6,8 @@ from app import db
 from flask_app.expense.utils import get_list_expense_users
 
 expense_module = Blueprint('expense_module', __name__)
-
+"""Blueprint expense_module"""
+"""Взаимодействие с расходами пользователя"""
 
 @login_required
 @expense_module.route("/", methods=['POST','GET'])

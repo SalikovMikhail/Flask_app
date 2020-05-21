@@ -7,6 +7,10 @@ from sqlalchemy import extract
 from flask_app.expense.utils import get_list_expense_users
 
 index_page = Blueprint('index_page', __name__)
+"""Blueprint index_page"""
+"""Вывод главной страницы и другой справочной информации приложения"""
+"""Создание пункта расхода пользователя, сделано на главной странице для удобства пользователя"""
+
 
 @index_page.route("/", methods=['GET','POST'])
 @index_page.route("/main/", methods=['GET', 'POST'] )
@@ -16,10 +20,8 @@ def home():
         expense = Expense(name = form.nameExpense.data, amount = form.sum.data, author = current_user)
         db.session.add(expense)
         db.session.commit()
-        print('Расход добававлен')
         return redirect(url_for('index_page.home'))
     if current_user.is_authenticated:
-        print('Пользователь авторизован')
         sum_expense = 0
         total = 0
         expenses = get_list_expense_users(current_user.get_id())
@@ -27,10 +29,8 @@ def home():
             sum_expense = sum_expense + current_expense.amount
         budget = current_user.budget
         total = budget - sum_expense
-        print(expenses)
         return render_template('home_is_authenticated.html', expenses=expenses, budget = budget, form = form, sum_expense = sum_expense, total = total)
     else:
-        print('Пользователь не авторизован')
         return render_template('main.html')
 
 
