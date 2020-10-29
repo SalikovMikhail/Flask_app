@@ -63,5 +63,5 @@ WTForms==2.2.1
 
 
 ## Разработал: **Михаил Саликов**
-## Telegarm: **@MikhailSalikov**
+## Telegram: **@MikhailSalikov**
 ## Email: **misha.salikov@yandex.ru**
