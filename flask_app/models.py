@@ -1,14 +1,12 @@
 from app import db, login
 from datetime import datetime
 from flask_login import UserMixin
-#Модели в бl
 
 
-
-#TO DO доделать модели БД
 class User(db.Model,UserMixin):
     """Таблица  пользователя"""
     __tablename__='Users'
+
     id = db.Column(db.Integer(), primary_key = True )
     name = db.Column(db.String(30), nullable = False )
     family = db.Column(db.String(30))
@@ -24,6 +22,7 @@ class User(db.Model,UserMixin):
 class Expense(db.Model):
     """Таблица расходов"""
     __tablename__='Expense'
+
     id = db.Column(db.Integer, primary_key = True)
     name = db.Column(db.String(40), nullable = False)
     amount = db.Column(db.Integer, nullable = False)

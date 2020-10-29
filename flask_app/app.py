@@ -18,6 +18,7 @@ def create_app(config_class = Configuration):
     db.init_app(app)
     bcrypt.init_app(app)
     login.init_app(app)
+    
 
     from flask_app.users.view import users
     from flask_app.index_page.view import index_page

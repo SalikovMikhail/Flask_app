@@ -4,9 +4,9 @@ from sqlalchemy import extract
 from datetime import datetime
 
 
-"""Получает список расхода пользователя за месяц"""
 
 def get_list_expense_users(id_user):
+    """Получает список расхода пользователя за месяц"""
     expenses = db.session.query(Expense).filter(
         Expense.id_user == id_user,\
         extract('month',Expense.created_date) == datetime.today().month,\

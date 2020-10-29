@@ -8,3 +8,4 @@ flask_app/__pycache__/*
 flask_app/users/__pycache__/*
 flask_app/index_page/__pycache__/*
 flask_app/expense/__pycache__/*
+flask_app/test.py

@@ -9,15 +9,16 @@ expense_module = Blueprint('expense_module', __name__)
 """Blueprint expense_module"""
 """Взаимодействие с расходами пользователя"""
 
-@login_required
 @expense_module.route("/", methods=['POST','GET'])
+@login_required
 def get_list_expenses():
     expenses = get_list_expense_users(current_user.get_id())
     return render_template('list_expenses.html', expenses = expenses)
 
 
-@login_required
+
 @expense_module.route("/<int:id_expense>/delete", methods=['POST','GET'])
+@login_required
 def delete_expense(id_expense):
     expense = Expense.query.get_or_404(id_expense)
     if expense.id_user == int(current_user.get_id()):
